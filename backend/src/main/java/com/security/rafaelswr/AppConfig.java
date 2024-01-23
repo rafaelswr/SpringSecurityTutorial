@@ -12,7 +12,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Configuration
@@ -24,6 +26,7 @@ public class AppConfig {
     @Bean
     CommandLineRunner commandLineRunner (EmployeeRepository employeeRepository, RoleRepository roleRepository){
         return args -> {
+
             Role user_role = new Role("USER");
             Role admin_role = new Role("ADMIN");
 
@@ -41,8 +44,6 @@ public class AppConfig {
 
             roleRepository.save(user_role);
             roleRepository.save(admin_role);
-
-
         };
     }
 }

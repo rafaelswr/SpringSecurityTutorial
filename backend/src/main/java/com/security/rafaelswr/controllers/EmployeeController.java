@@ -3,13 +3,13 @@ package com.security.rafaelswr.controllers;
 import com.security.rafaelswr.models.Employee;
 import com.security.rafaelswr.models.EmployeeDto;
 import com.security.rafaelswr.models.EmployeeInfo;
+import com.security.rafaelswr.services.AuthenticationService;
 import com.security.rafaelswr.services.EmployeeServices;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -17,9 +17,11 @@ import java.util.stream.Collectors;
 @CrossOrigin("*")
 public class EmployeeController {
 
+    private final AuthenticationService authenticationService;
     private final EmployeeServices employeeServices;
 
-    public EmployeeController(EmployeeServices employeeServices) {
+    public EmployeeController(AuthenticationService authenticationService, EmployeeServices employeeServices) {
+        this.authenticationService = authenticationService;
         this.employeeServices = employeeServices;
     }
 
@@ -32,18 +34,13 @@ public class EmployeeController {
     public String admin(){
         return "Admin Access !";
     }
+   /*
+       @GetMapping("/employees")
+       public ResponseEntity<List<Employee>> getAllEmployees(){
+              return new ResponseEntity<>(employeeServices.getAll(), HttpStatus.OK);
+        }
 
-    @PostMapping("/employees/add")
-    public void addEmployee(@RequestBody EmployeeInfo emp) throws Exception {
-        employeeServices.saveNewEmployee(emp);
-    }
-
-    /*
-    @GetMapping("/employees")
-    public ResponseEntity<List<EmployeeInfo>> getAllEmployees(){
-           return new ResponseEntity<>(employeeServices.getAll(), HttpStatus.OK);
-     }
-    */
+*/
     @GetMapping("/employees")
     public ResponseEntity<List<EmployeeDto>> getAllEmployees(){
         List<Employee> employees = employeeServices.getAll();

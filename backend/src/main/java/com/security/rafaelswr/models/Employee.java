@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.lang.reflect.Array;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -20,7 +21,9 @@ public class Employee implements UserDetails{
     @Column(name = "employee_id")
     private Long employeeId;
 
+    @Column(unique = true)
     private String username;
+
     private String password;
 
     @Transient
@@ -43,7 +46,6 @@ public class Employee implements UserDetails{
         this.username = username;
         this.password = password;
         this.authority = authority;
-
     }
     @Override
     public boolean isAccountNonExpired() {
@@ -63,5 +65,9 @@ public class Employee implements UserDetails{
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public String toString(){
+        return "Username: "+this.getUsername()+"\nPassword: "+this.getPassword();
     }
 }
