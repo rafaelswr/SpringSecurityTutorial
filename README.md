@@ -1,4 +1,8 @@
-My ongoing journey to learn security in Spring"
+## My ongoing journey to learn security in Spring.
 
-Tecnologies: Postman, Java, PostgreSQL
-IDE: IntelliJ 
+### **Keywords about this project:**
+many-to-many relationship - PostgreSQL - PasswordEncoder - DTO classes - SecurityFilterChain - AuthenticationManager
+
+### **Tecnologies:**
+Postman, Java, PostgreSQL
+### **IDE:** IntelliJ 
