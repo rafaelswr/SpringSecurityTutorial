@@ -6,6 +6,7 @@ import com.security.rafaelswr.models.Role;
 import com.security.rafaelswr.repositories.EmployeeRepository;
 import com.security.rafaelswr.repositories.RoleRepository;
 import jakarta.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -20,8 +21,9 @@ import java.util.Optional;
 public class AuthenticationService {
     private EmployeeRepository employeeRepository;
     private RoleRepository roleRepository;
-    private PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
+    @Autowired
     public AuthenticationService(EmployeeRepository employeeRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
         this.employeeRepository = employeeRepository;
         this.roleRepository = roleRepository;
@@ -29,22 +31,24 @@ public class AuthenticationService {
     }
 
     public Employee registerUser(EmployeeInfo emp) throws Exception {
-        Optional<Employee> existingEmployee = employeeRepository.findByEmail(emp.getEmail());
+        Optional<EmployeeInfo> existingEmployee = employeeRepository.findByEmail(emp.getEmail());
 
         if (existingEmployee.isPresent()) {
             throw new Exception("Employee email already exists!");
         } else {
 
-            emp.setPassword(passwordEncoder.encode(emp.getPassword()));
+           emp.setPassword(passwordEncoder.encode(emp.getPassword()));
 
             Optional<Role> findRole = roleRepository.findByAuthority(emp.getAuthority());
-            if(findRole.isPresent()){
+            if (findRole.isPresent()){
                 emp.getAuthorities().add(findRole.get());
-            }else{
+            } else {
                 Role r = new Role(emp.getAuthority());
                 emp.getAuthorities().add(r);
                 roleRepository.save(r);
+
             }
+
 
          return employeeRepository.save(emp);
             /*

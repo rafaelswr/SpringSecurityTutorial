@@ -13,9 +13,8 @@ import java.util.Optional;
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
     @Query("SELECT s from EmployeeInfo s where s.email = ?1")
-    Optional<Employee> findByEmail(String email);
+    Optional<EmployeeInfo> findByEmail(String email);
 
-    @Query("SELECT u from Employee u where u.username = ?1")
     Optional<Employee> findByUsername(String username);
 
 }

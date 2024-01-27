@@ -34,13 +34,12 @@ public class EmployeeController {
     public String admin(){
         return "Admin Access !";
     }
-   /*
+    /*
        @GetMapping("/employees")
        public ResponseEntity<List<Employee>> getAllEmployees(){
               return new ResponseEntity<>(employeeServices.getAll(), HttpStatus.OK);
         }
-
-*/
+    */
     @GetMapping("/employees")
     public ResponseEntity<List<EmployeeDto>> getAllEmployees(){
         List<Employee> employees = employeeServices.getAll();
@@ -51,7 +50,6 @@ public class EmployeeController {
         return new ResponseEntity<>(combinedDTOs, HttpStatus.OK);
 
     }
-
 
     @DeleteMapping("/employees/delete/{id}")
     public void deleteEmployee(@PathVariable Long id) throws Exception {

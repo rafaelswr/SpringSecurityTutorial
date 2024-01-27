@@ -20,11 +20,6 @@ import java.util.Optional;
 
 @Service
 public class EmployeeServices implements UserDetailsService {
-
-    //password Encoder
-    @Autowired
-    private PasswordEncoder encoder;
-
     private final EmployeeRepository employeeRepository;
     private final RoleRepository roleRepository;
 
@@ -58,9 +53,7 @@ public class EmployeeServices implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         System.out.println("In the user details service");
-
-        return employeeRepository.findByUsername(username)
-                .orElseThrow(()->new UsernameNotFoundException("USER "+username+" NOT FOUND!!!"));
+        return employeeRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("user is not valid"));
     }
 
     public EmployeeDto convertToEmployeeDTO(Employee employee) {
