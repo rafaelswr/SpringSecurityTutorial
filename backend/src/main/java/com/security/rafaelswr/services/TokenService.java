@@ -33,7 +33,6 @@ public class TokenService {
         JwtClaimsSet claims = JwtClaimsSet.builder()
                 .issuer("self")
                 .issuedAt(now)
-                .expiresAt(null)
                 .subject(auth.getName())
                 .claim("roles", scope)
                 .build();
