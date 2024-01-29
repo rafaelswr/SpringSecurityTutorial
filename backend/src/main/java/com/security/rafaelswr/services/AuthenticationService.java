@@ -90,15 +90,14 @@ public class AuthenticationService {
     //generate the JWT token
     public LoginResponseDto loginUser(String username, String password){
         try {
+
             Authentication auth = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(username, password)
             );
 
             String token = tokenService.generateJwt(auth);
 
-            System.out.println("RETRIEVED:"+employeeRepository.findByUsername(username).get().toString());
-
-            return new LoginResponseDto( employeeRepository.findByUsername(username).get(), token);
+            return new LoginResponseDto(employeeRepository.findByUsername(username).get(), token);
 
         }catch (AuthenticationException e){
             return new LoginResponseDto(null, "");

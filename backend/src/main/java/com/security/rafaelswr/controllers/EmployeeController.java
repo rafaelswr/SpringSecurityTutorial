@@ -35,12 +35,12 @@ public class EmployeeController {
         return "Admin Access !";
     }
     /*
-       @GetMapping("/employees")
+       @GetMapping("/employee")
        public ResponseEntity<List<Employee>> getAllEmployees(){
               return new ResponseEntity<>(employeeServices.getAll(), HttpStatus.OK);
         }
     */
-    @GetMapping("/employees")
+    @GetMapping("/employee/all")
     public ResponseEntity<List<EmployeeDto>> getAllEmployees(){
         List<Employee> employees = employeeServices.getAll();
         List<EmployeeDto> combinedDTOs = employees.stream()
@@ -51,12 +51,12 @@ public class EmployeeController {
 
     }
 
-    @DeleteMapping("/employees/delete/{id}")
+    @DeleteMapping("/employee/delete/{id}")
     public void deleteEmployee(@PathVariable Long id) throws Exception {
         employeeServices.deleteEmployee(id);
     }
 
-    @GetMapping("/employees/{id}")
+    @GetMapping("/employee/{id}")
     public EmployeeDto getEmployeeById(@PathVariable Long id) throws Exception {
         return employeeServices.getEmployeeById(id);
     }

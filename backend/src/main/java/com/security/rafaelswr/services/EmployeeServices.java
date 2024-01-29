@@ -42,13 +42,12 @@ public class EmployeeServices implements UserDetailsService {
         if(employee.isPresent()){
             return convertToEmployeeDTO(employee.get());
         }else{
-            throw new Exception("NOT FOUND ");
+            throw new Exception("Not found ");
         }
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        System.out.println("In the user details service + " + username);
         return employeeRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("user is not valid"));
     }
 

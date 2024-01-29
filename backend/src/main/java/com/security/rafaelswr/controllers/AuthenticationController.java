@@ -22,9 +22,8 @@ public class AuthenticationController {
         return authenticationService.registerUser(employeeInfo);
     }
 
-    @PostMapping("/loginn")
+    @PostMapping("/login")
     public LoginResponseDto loginEmployee(@RequestBody RegistrationDTO employee) throws Exception {
-        System.out.println("LOGIN EMP: "+ employee.toString());
         return authenticationService.loginUser(employee.getUsername(), employee.getPassword());
     }
 
