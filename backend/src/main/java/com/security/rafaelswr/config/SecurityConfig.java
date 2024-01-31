@@ -63,11 +63,11 @@ public class SecurityConfig{
                 .csrf(csrf->csrf.disable())
                 .authorizeRequests(auth-> {
                     //permit all acess on page login/register
-                    auth.requestMatchers("/auth/**").permitAll();
+                    auth.requestMatchers("/auth/**", "/login").permitAll();
                     auth.requestMatchers("/admin/**").hasRole("ADMIN");
                     auth.requestMatchers("/employee/**").hasAnyRole("ADMIN","USER");
                     auth.anyRequest().authenticated();
-                });
+                }).formLogin(Customizer.withDefaults());
 
             http.oauth2ResourceServer(oauth2 ->
                     oauth2
