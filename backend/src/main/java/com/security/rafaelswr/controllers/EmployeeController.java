@@ -62,6 +62,11 @@ public class EmployeeController {
     }
 
 
+    @GetMapping("/employee/roles/{role}")
+    public List<Employee> getAllByRole(@PathVariable String role){
+       return  employeeServices.findAllByRole(role);
+    }
+
 
 }
 

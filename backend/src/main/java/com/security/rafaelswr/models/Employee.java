@@ -25,7 +25,6 @@ public class Employee implements UserDetails{
     private String username;
 
     private String password;
-
     @Transient
     private String authority;
 

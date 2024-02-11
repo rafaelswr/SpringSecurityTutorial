@@ -32,6 +32,7 @@ public class Role implements GrantedAuthority {
     public Role(String authority){
         this.authority = authority;
         this.employees = new HashSet<>();
+
     }
 
     @Override

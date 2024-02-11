@@ -13,6 +13,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 @Service
 public class EmployeeServices implements UserDetailsService {
@@ -74,4 +77,10 @@ public class EmployeeServices implements UserDetailsService {
         }
 
     }
+
+    public List<Employee> findAllByRole(String role) {
+       // return employeeRepository.findAll().stream().filter(p -> p.getAuthority().equals(role)).collect(toList());
+        return employeeRepository.findAllByRole(role);
+    }
+
 }
